@@ -50,6 +50,9 @@ type Job struct {
 
 	// the job job_func to run, func[job_func]
 	job_func string
+	
+	fparams []interface{}
+	
 	// time units, ,e.g. 'minutes', 'hours'...
 	unit string
 	// optional time at which this job runs
