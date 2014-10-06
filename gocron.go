@@ -51,7 +51,7 @@ type Job struct {
 	// the job job_func to run, func[job_func]
 	job_func string
 	
-	fparams []interface{}
+	params []interface{}
 	
 	// time units, ,e.g. 'minutes', 'hours'...
 	unit string
