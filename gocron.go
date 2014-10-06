@@ -84,7 +84,7 @@ func (j *Job) should_run() bool {
 //Run the job and immdiately reschedulei it
 func (j *Job) run() (result []reflect.Value, err error) {
 	f := reflect.ValueOf(funcs[j.job_func])
-	params := fparams[j.job_func]
+	params := j.params
 	if len(params) != f.Type().NumIn() {
 		err = errors.New("The number of param is not adapted.")
 		return
@@ -114,7 +114,7 @@ func (j *Job) Do(job_fun interface{}, params ...interface{}) {
 
 	fname := getFunctionName(job_fun)
 	funcs[fname] = job_fun
-	fparams[fname] = params
+	j.params = params
 	j.job_func = fname
 	//schedule the next run
 	j.scheduleNextRun()
