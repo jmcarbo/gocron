@@ -24,6 +24,7 @@ import (
 	"runtime"
 	"sort"
 	"time"
+	"fmt"
 )
 
 // Time location, default set by the time.Local (*time.Location)
@@ -41,7 +42,7 @@ const MAXJOBNUM = 10000
 var funcs = map[string]interface{}{}
 
 // Map for function and  params of function
-var fparams = map[string]([]interface{}){}
+//var fparams = map[string]([]interface{}){}
 
 type Job struct {
 
@@ -84,14 +85,15 @@ func (j *Job) should_run() bool {
 //Run the job and immdiately reschedulei it
 func (j *Job) run() (result []reflect.Value, err error) {
 	f := reflect.ValueOf(funcs[j.job_func])
-	params := j.params
-	if len(params) != f.Type().NumIn() {
+	curparams := j.params
+	if len(curparams) != f.Type().NumIn() {
 		err = errors.New("The number of param is not adapted.")
 		return
 	}
-	in := make([]reflect.Value, len(params))
-	for k, param := range params {
+	in := make([]reflect.Value, len(curparams))
+	for k, param := range curparams {
 		in[k] = reflect.ValueOf(param)
+		
 	}
 	result = f.Call(in)
 	j.last_run = time.Now()
@@ -401,6 +403,7 @@ func (s *Scheduler) NextRun() (*Job, time.Time) {
 
 // Schedule a new periodic job
 func (s *Scheduler) Every(interval uint64) *Job {
+	fmt.Println("bla bla bla")
 	job := NewJob(interval)
 	s.jobs[s.size] = job
 	s.size++
