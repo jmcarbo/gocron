@@ -24,7 +24,7 @@ import (
 	"runtime"
 	"sort"
 	"time"
-	"fmt"
+
 )
 
 // Time location, default set by the time.Local (*time.Location)
@@ -403,7 +403,6 @@ func (s *Scheduler) NextRun() (*Job, time.Time) {
 
 // Schedule a new periodic job
 func (s *Scheduler) Every(interval uint64) *Job {
-	fmt.Println("bla bla bla")
 	job := NewJob(interval)
 	s.jobs[s.size] = job
 	s.size++
