@@ -73,7 +73,7 @@ type Job struct {
 
 // Create a new job with the time interval.
 func NewJob(intervel uint64) *Job {
-	return &Job{intervel, "", "", "", time.Unix(0, 0), time.Unix(0, 0), 0, time.Sunday}
+	return &Job{intervel, "", "", "", time.Unix(0, 0), time.Unix(0, 0), 0, time.Sunday, nil}
 }
 
 // True if the job should be run now
