@@ -51,7 +51,7 @@ type Job struct {
 	// the job job_func to run, func[job_func]
 	job_func string
 	
-	params []interface{}
+	
 	
 	// time units, ,e.g. 'minutes', 'hours'...
 	unit string
@@ -67,6 +67,8 @@ type Job struct {
 
 	// Specific day of the week to start on
 	start_day time.Weekday
+	
+	params []interface{}
 }
 
 // Create a new job with the time interval.
